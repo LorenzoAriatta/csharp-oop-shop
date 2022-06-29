@@ -26,7 +26,7 @@ public class Product
 		} 
 	}
 
-	public int Iva 
+	public long Iva 
 	{ 
 		get 
 		{ 
@@ -34,7 +34,7 @@ public class Product
 		} 
 		set 
 		{ 
-			Iva = value; 
+			Iva = this.SetIva(); 
 		} 
 	}	
 
@@ -58,5 +58,12 @@ public class Product
 		Random random = new Random();
 		uint randomPrice = (uint)random.Next(0, 1000000);
 		return randomPrice;
+    }
+
+	public long SetIva()
+    {
+		int iva = 22;
+		long tax = (this.Price * iva) / 100;
+		return tax;
     }
 }
