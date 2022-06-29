@@ -2,8 +2,8 @@
 
 public class Product
 {
-	public int code;
-	public int Code
+	private string code;
+	private string Code
 	{
 		get
 		{
@@ -15,8 +15,8 @@ public class Product
 		}
 	}
 
-	public double price;
-	public double Price 
+	private double price;
+	private double Price 
 	{ 
 		get
 		{
@@ -28,8 +28,8 @@ public class Product
 		} 
 	}
 
-	public double iva;
-	public double Iva 
+	private double iva;
+	private double Iva 
 	{ 
 		get 
 		{ 
@@ -39,10 +39,10 @@ public class Product
 		{
 			iva = this.SetIva(); 
 		} 
-	}	
+	}
 
-	public string name;
-	public string description;
+	private string name;
+	private string description;
 	
 	public Product(string productName, int productPrice)
 	{
@@ -51,11 +51,20 @@ public class Product
 		this.code = this.CreateCode();
 	}
 
-	public int CreateCode()
+	public string CreateCode()
     {
 		Random rnd = new Random();
-		int randomCode = rnd.Next(1, 99999999);
-		return randomCode;
+		string randomCode = rnd.Next(1, 10000).ToString();
+		string newRandomCode = "";
+		if(randomCode.Length < 8)
+        {
+
+			for(int i = 0; i < (8 - randomCode.Length); i++)
+            {
+				newRandomCode += "0";
+            }
+        }
+		return newRandomCode + randomCode;
 	}
 
 	public double SetIva()
@@ -64,5 +73,11 @@ public class Product
 		double tax = (this.Price * iva) / 100;
 		double finalPrice = tax + this.Price;
 		return finalPrice;
+    }
+
+	public string FullName()
+    {
+		string productName = this.name + " " + "'" + this.code + "'";
+		return productName;	
     }
 }
