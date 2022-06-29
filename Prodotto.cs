@@ -2,48 +2,53 @@
 
 public class Product
 {
+	public int code;
 	public int Code
 	{
 		get
 		{
-			return Code;
+			return code;
 		}
 		set
 		{
-			Code = this.CreateCode();
+			code = this.CreateCode();
 		}
 	}
 
-	public uint Price 
+	public double price;
+	public double Price 
 	{ 
 		get
 		{
-			return Price;
+			return price;
 		}
 		set 
 		{
-			Price = this.SetPrice();
+			price = Price;
 		} 
 	}
 
-	public long Iva 
+	public double iva;
+	public double Iva 
 	{ 
 		get 
 		{ 
-			return Iva; 
+			return iva; 
 		} 
 		set 
-		{ 
-			Iva = this.SetIva(); 
+		{
+			iva = this.SetIva(); 
 		} 
 	}	
 
 	public string name;
-	public int description;
+	public string description;
 	
-	public Product()
+	public Product(string productName, int productPrice)
 	{
-		
+		this.name = productName;
+		this.price = productPrice;
+		this.code = this.CreateCode();
 	}
 
 	public int CreateCode()
@@ -53,17 +58,11 @@ public class Product
 		return randomCode;
 	}
 
-	public uint SetPrice()
-    {
-		Random random = new Random();
-		uint randomPrice = (uint)random.Next(0, 1000000);
-		return randomPrice;
-    }
-
-	public long SetIva()
+	public double SetIva()
     {
 		int iva = 22;
-		long tax = (this.Price * iva) / 100;
-		return tax;
+		double tax = (this.Price * iva) / 100;
+		double finalPrice = tax + this.Price;
+		return finalPrice;
     }
 }
